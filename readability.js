@@ -34,18 +34,15 @@ Review the following code and replace the magic numbers with named constants to 
 function calculateCircleArea(radius) {
   return 3.14 * radius * radius;
 }
-
+const PI = 3.14;
 console.log(calculateCircleArea(10));
 
 /* Exercise 5: Avoiding Global Variables
 The following code uses a global variable. Refactor it to avoid using global variables, making use of function parameters or return values instead.*/
 
-let greeting = "Hello, world!";
-
 function sayHello() {
-  console.log(greeting);
+  console.log("Hello, world!");
 }
-
 sayHello();
 
 /* Exercise 6: Use of let vs const
@@ -53,14 +50,14 @@ In the following code snippet, determine where you can use const instead of let,
 
 let x = 10;
 let y = 20;
-let sum = x + y;
+const sum = x + y;
 console.log(sum);
 
 /* Exercise 7: Avoiding the == Operator
 This code snippet uses the == operator. Refactor it to use === instead, because === is more predictable as it also checks the type of the variables.*/
 
-let x = "10";
-if (x == 10) {
+let x = 10;
+if (x === 10) {
   console.log("x is 10");
 } else {
   console.log("x is not 10");
@@ -84,9 +81,9 @@ function calculateAreaTriangle(base, height) {
 /* Exercise 9: Use of Arrow Functions
 Refactor this code to use arrow functions, which provide a more concise syntax for function definition.*/
 
-function multiply(a, b) {
-  return a * b;
-}
+const multiply = (firstNumber, secondNumber) => {
+  return firstNumber * secondNumber;
+};
 
 let numbers = [1, 2, 3, 4, 5];
 numbers = numbers.map(function (number) {
@@ -98,10 +95,7 @@ console.log(numbers);
 /* Exercise 10: Naming Conventions
 Rename the variable name so they make sense and describe what they're actually doing. */
 
-function my_snake_case_function_is_so_FREAKING_COOL_but_I_likeCamelCaseBetter(
-  parrot,
-  brick
-) {
+function Division(parrot, brick) {
   if (brick !== 0) {
     return parrot / brick;
   }
@@ -111,72 +105,68 @@ function my_snake_case_function_is_so_FREAKING_COOL_but_I_likeCamelCaseBetter(
 /* Exercise 11: DRY
 These functions perform very similar tasks. Refactor them into a single, more flexible function that maintains the same functionality. */
 
-function greetMorning(name) {
-  return `Good morning, ${name}!`;
-}
-
-function greetAfternoon(name) {
-  return `Good afternoon, ${name}!`;
-}
-
-function greetEvening(name) {
-  return `Good evening, ${name}!`;
+function greet(name, timeOfDay) {
+  if (timeOfDay === "morning") {
+    return `Good morning, ${name}!`;
+  }
+  if (timeOfDay === "afternoon") {
+    return `Good afternoon, ${name}!`;
+  }
+  if (timeOfDay === "evening") {
+    return `Good evening, ${name}!`;
+  } else {
+    return `Hello, ${name}!`;
+  }
 }
 
 /* Exercise 12: DRY
 This code has repetitive conditional checks. Refactor it to avoid the repetition.   */
 
-if (day === "Monday") {
-  console.log("Start of the work week.");
-} else if (day === "Tuesday") {
-  console.log("Second day of the work week.");
-} else if (day === "Wednesday") {
-  console.log("Mid-week.");
-} else if (day === "Thursday") {
-  console.log("Almost the weekend.");
-} else if (day === "Friday") {
-  console.log("Last day of the work week.");
-} else if (day === "Saturday") {
-  console.log("Weekend, time to relax.");
-} else if (day === "Sunday") {
-  console.log("Weekend, time to prepare for the upcoming week.");
-}
+const dayMessages = {
+  Monday: "Start of the work week.",
+  Tuesday: "Second day of the work week.",
+  Wednesday: "Mid-week.",
+  Thursday: "Almost the weekend.",
+  Friday: "Last day of the work week.",
+  Saturday: "Weekend, time to relax.",
+  Sunday: "Weekend, time to prepare for the upcoming week.",
+};
+
+const day = "Wednesday";
+
+console.log(dayMessages[day]);
 
 /* Exercise 13: DRY
 The following code loops over the same array twice. Can you refactor it to achieve the same results but only loop over the array once? */
 
 let numbers = [1, 2, 3, 4, 5];
-
 let sum = 0;
+
 for (let i = 0; i < numbers.length; i++) {
   sum += numbers[i];
-}
-console.log(sum);
-
-for (let i = 0; i < numbers.length; i++) {
   if (numbers[i] % 2 === 0) {
     console.log(numbers[i]);
   }
 }
+console.log(sum);
 
 /* Exercise 14: DRY
 There are multiple code blocks in the function that do the same thing. Refactor the function to eliminate this duplication. */
 
 function processArray(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
   if (arr.length > 10) {
-    let sum = 0;
-    for (let i = 0; i < arr.length; i++) {
-      sum += arr[i];
-    }
     return sum;
   } else {
-    let sum = 0;
-    for (let i = 0; i < arr.length; i++) {
-      sum += arr[i];
-    }
     return sum * 2;
   }
 }
+
+console.log(processArray([5, 4, 6, 9, 2, 4, 5, 7, 8]));
+console.log(processArray([2, 3, 5, 7, 8, 5, 4, 6, 9, 2, 4, 5, 7, 8]));
 
 /*  Exercise 15: DRY isn't only about code logic.
 In general, the DRY principle is about more than just reducing the amount of code. It's also about making your code more efficient and easier to understand.
@@ -185,9 +175,9 @@ This object has several properties that hold very similar data but share somethi
 */
 
 let menu = {
-  burgerPrice: 10,
-  friesPrice: 5,
-  shakePrice: 3,
-  sodaPrice: 2,
-  saladPrice: 7,
+  burger: 10,
+  fries: 5,
+  shake: 3,
+  soda: 2,
+  salad: 7,
 };
